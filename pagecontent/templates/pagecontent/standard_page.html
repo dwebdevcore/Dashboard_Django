@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}template-standardpage{% endblock %}
+
+{% block content %}
+    {{ page.body|richtext }}
+{% endblock %}
+
+{% block sidebar %}
+    <div class="sidebar">
+        {% if page.sidebar_image %}
+          {% image page.sidebar_image width-250 %}
+        {% endif %}
+        <div id="captionText">{{ page.sidebar_caption }}</div>
+    </div>
+{% endblock %}

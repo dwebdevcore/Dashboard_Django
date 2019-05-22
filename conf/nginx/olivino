@@ -1,0 +1,21 @@
+server {
+    listen 80;
+    server_name olivino.com stg.olivino.com www.olivino.com;
+    access_log /var/log/nginx/olivino.log;
+    
+    location = /favicon.ico { access_log off; log_not_found off; }
+    
+    ## Deny illegal Host headers
+    if ($host !~* ^(olivino.com|stg.olivino.com|www.olivino.com)$ ) {
+        return 444;
+    }
+
+    location ~ \.php$ {
+        rewrite ^ / permanent;
+    }
+
+    location / {
+        include         uwsgi_params;
+        uwsgi_pass      0.0.0.0:8003;
+    }
+}

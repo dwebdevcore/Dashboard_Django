@@ -1,0 +1,13 @@
+{% load wagtailcore_tags %}
+
+{% if ancestors %}
+  <div id="feature-breadcrumbs">
+    {% for ancestor in ancestors %}
+      {% if forloop.last %}
+        <span>{{ ancestor }}</span>
+      {% else %}
+        <span>{{ ancestor }}</span>:
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endif %}

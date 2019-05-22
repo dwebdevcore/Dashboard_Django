@@ -1,0 +1,8 @@
+{% load wagtailcore_tags %}
+<ul class="nav nav-pills hidden-xs">
+    {% for menuitem in menuitems %}
+        <li role="presentation">
+            <a href="{% pageurl menuitem %}">{{ menuitem.title }}</a>
+        </li>
+    {% endfor %}
+</ul>

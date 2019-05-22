@@ -1,0 +1,28 @@
+{% extends "base_subpage.html" %}
+
+{% load pagecontent_tags wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}template-standardsubpage{% endblock %}
+
+{% breadcrumbs %}
+
+{% block content %}
+    {{ page.body|richtext }}
+{% endblock %}
+
+{% block sidebar %}
+    <div class="sidebar sidebar-subpage">
+    {% if page.sidebar_image %}
+        {% image page.sidebar_image width-250 %}
+    {% endif %}
+    {% if page.sidebar_caption %}
+        <div id="captionText">
+            {{ page.sidebar_caption }}
+        </div>
+    {% endif %}
+    {% if self %}
+        {% left_column_links %}
+    {% endif %}
+    </div>
+
+{% endblock %}

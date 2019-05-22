@@ -1,0 +1,36 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /opt/django/olivino
+  - source: /conf/supervisor/olivino.conf
+    destination: /etc/supervisor/conf.d
+  - source: /conf/nginx/olivino
+    destination: /etc/nginx/sites-available
+permissions:
+  - object: /opt/django/olivino
+    pattern: "**"
+    owner: olivino
+    group: webapps
+    type:
+      - file
+permissions:
+  - object: /opt/django/olivino
+    pattern: "**"
+    owner: olivino
+    group: webapps
+    type:
+      - directory
+hooks:
+  AfterInstall:
+    - location: bin/install_dependencies.sh
+      timeout: 900
+      runas: olivino
+  ApplicationStart:
+    - location: bin/start_server.sh
+      timeout: 300
+      runas: ubuntu
+  ApplicationStop:
+    - location: bin/stop_server.sh
+      timeout: 300
+      runas: ubuntu

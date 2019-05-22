@@ -1,0 +1,35 @@
+{% load pagecontent_tags wagtailcore_tags static %}
+{% get_site_root as site_root %}
+
+<nav class="navbar navbar-home navbar-static-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="{% pageurl site_root %}" class="navbar-brand" title="{{ site_root.title }}"
+               data-placement="bottom">
+            </a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav hidden-sm hidden-md hidden-lg">
+                {% for menuitem in menuitems %}
+                    <li class="{% if menuitem.active %} active{% endif %}">
+                        <a href="{% pageurl menuitem %}">{{ menuitem.title }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div><!--/.nav-collapse -->
+        <p id="menu-text" class="hidden-xs">
+            "Ancient Athena, goddess of wisdom, was challenged by poseidon to <br>
+            provide the Greeks with the most useful divine gift. He produced <br>
+            warhorses, but Athena won with her creation, the olive tree." <br>
+        </p>
+
+    </div>
+</nav>
+

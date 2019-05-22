@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags bootstrap_tags %}
+
+{% block body_class %}template-formpage{% endblock %}
+
+{% block content %}
+
+    {{ page.intro|richtext }}
+
+    <form action="{% pageurl page %}" method="POST">
+        {% csrf_token %}
+        {{ form|as_bootstrap }}
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+
+{% endblock %}
+
+{% block sidebar %}
+
+{% endblock %}

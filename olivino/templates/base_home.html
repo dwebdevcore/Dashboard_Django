@@ -1,0 +1,89 @@
+{% load pagecontent_tags wagtailadmin_tags wagtailcore_tags wagtailembeds_tags wagtailimages_tags wagtailuserbar wagtailusers_tags cache static %}
+{% get_site_root as site_root %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}">
+    <meta name="author" content="DynaCode [www.dyna-code.com]">
+    <link rel="icon" href="{% static 'images/favicon.ico' %}">
+
+    <title>
+        {% block title %}{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}{% endblock %}
+        {% block title_suffix %}{% endblock %}</title>
+
+    <!-- Bootstrap core CSS -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
+          integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="https://maxcdn.bootstrapcdn.com/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/olivino.css' %}">
+</head>
+
+<body class="{% block body_class %}{% endblock %}">
+
+<header id="header">
+    {% block menu %}
+        {% top_menu_home parent=site_root calling_page=self %}
+    {% endblock %}
+</header>
+
+<div class="sidebar sidebar-home">
+    <img src="{% static 'images/home_logo.gif' %}" alt="">
+    {% if self %}
+        {% home_column_links parent=self %}
+    {% endif %}
+</div>
+<section id="content-home">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 main-home">
+                <div id="tagline-home">The North Coast Resource for Olive Oil and Wine Producers</div>
+                {% inline_menu parent=site_root calling_page=self %}
+
+                {% block content %}
+                {% endblock %}
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer id="footer-home">
+    <div>
+        <p>
+            <a href="#top">Top</a> |
+            <a href="{% pageurl site_root %}">Home</a> |
+            <a href="{% get_site_root as site_root %}/sitemap">Sitemap</a> |
+            <a href="{% get_site_root as site_root %}/admin">Log In</a>
+        </p>
+        <p>Copyright by Olivino &copy; 2006-{% now 'Y' %}. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="https://maxcdn.bootstrapcdn.com/js/ie10-viewport-bug-workaround.js"></script>
+</body>
+</html>

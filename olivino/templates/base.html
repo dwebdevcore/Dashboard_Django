@@ -1,0 +1,94 @@
+{% load pagecontent_tags wagtailadmin_tags wagtailcore_tags wagtailembeds_tags wagtailimages_tags wagtailuserbar wagtailusers_tags cache static wagtailuserbar %}
+{% get_site_root as site_root %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}">
+    <meta name="author" content="DynaCode [www.dyna-code.com]">
+    <link rel="icon" href="{% static 'images/favicon.ico' %}">
+
+    <title>
+        {% block title %}{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}{% endblock %}
+        {% block title_suffix %}{% endblock %}</title>
+
+    <!-- Bootstrap core CSS -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="https://maxcdn.bootstrapcdn.com/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/olivino.css' %}">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+</head>
+
+<body class="{% block body_class %}{% endblock %}">
+
+
+<header id="header">
+
+    {% block supermenu %}
+    {% endblock %}
+
+    {% block menu %}
+        {% top_menu parent=site_root calling_page=self %}
+    {% endblock %}
+</header>
+
+{% block sidebar %}{% endblock %}
+
+{% block content_ %}{% endblock %}
+
+<section id="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 main">
+                <div class="row">
+                    <div class="col-sm-9" id="main-content-column">
+                        {% block content %}{% endblock %}
+                    </div>
+                    {% if self %}
+                        <div class="col-sm-3" id="right-column">
+                            {% right_column_links parent=self %}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer id="footer">
+    <div>
+        <p>
+            <a href="#top">Top</a> |
+            <a href="{% pageurl site_root %}">Home</a> |
+            <a href="{% get_site_root as site_root %}/sitemap">Sitemap</a> |
+            <a href="{% get_site_root as site_root %}/admin">Log In</a>
+        </p>
+        <p>Copyright by Olivino &copy; 2006-{% now 'Y' %}. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+        integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+        crossorigin="anonymous"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="https://maxcdn.bootstrapcdn.com/js/ie10-viewport-bug-workaround.js"></script>
+</body>
+</html>

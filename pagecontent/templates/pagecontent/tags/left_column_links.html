@@ -1,0 +1,20 @@
+{% load wagtailcore_tags %}
+
+{% if ancestors %}
+    <div class="left-column-block">
+        <ol class="left-column-subnav">
+            {% for ancestor in ancestors %}
+                <li>
+                    <a href="{% pageurl ancestor %}">
+                        <h1 class="left-column-page-title">{{ ancestor }}</h1>
+                    </a>
+                </li>
+
+
+            {% endfor %}
+            {% for brother in brothers %}
+                <li><a href="{% pageurl brother %}">{{ brother }}</a></li>
+            {% endfor %}
+        </ol>
+    </div>
+{% endif %}

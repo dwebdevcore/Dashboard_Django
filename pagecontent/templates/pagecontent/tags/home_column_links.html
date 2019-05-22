@@ -1,0 +1,9 @@
+{% load wagtailcore_tags %}
+
+<div class="home-column-block">
+    <ul class="home-column-subnav">
+        {% for child in menuitems_children %}
+            <li><a href="{% pageurl child %}">{{ child.title }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
